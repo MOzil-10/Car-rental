@@ -24,12 +24,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getCarByCarId(Long id) {
-        try {
-            return repository.findById(id).
-                    orElseThrow(()-> new RuntimeException("Car with id + " + id + "does not exist"));
-        } catch (Exception e){
-            throw new RuntimeException(e.getMessage());
-        }
+        return repository.findById(id)
+                .orElseThrow(() -> new CarNotAvailableException("Car with ID " + id + " does not exist."));
     }
 
     @Override
